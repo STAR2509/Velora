@@ -23,7 +23,7 @@ const PRODUCTS = [
     originalPrice: null,
     badge: null,
     description: "Ultra-soft 100% merino wool scarf in a timeless herringbone weave. Naturally temperature-regulating.",
-    imageUrl: "https://images.unsplash.com/photo-1601370552761-0c09e8e9a4ea?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
+    imageUrl: "https://images.unsplash.com/photo-1553062407-98eeb64c6a62?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
     rating: 4.6,
     reviews: 89,
     inStock: true
@@ -62,7 +62,7 @@ const PRODUCTS = [
     originalPrice: null,
     badge: null,
     description: "Hand-poured soy wax candle with essential oils of cedar, sandalwood and bergamot. 60+ hour burn time.",
-    imageUrl: "https://images.unsplash.com/photo-1603905756565-7047b1a8c08a?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
+    imageUrl: "https://images.unsplash.com/photo-1596232906355-12f45c24c9cd?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
     rating: 4.5,
     reviews: 178,
     inStock: true
