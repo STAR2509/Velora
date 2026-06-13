@@ -10,7 +10,7 @@ const PRODUCTS = [
     originalPrice: 7499.00,
     badge: "Sale",
     description: "Hand-stitched full-grain leather tote with brass hardware. Spacious interior with zipper pocket. Perfect for work or weekend.",
-    imageUrl: "https://images.unsplash.com/photo-1548036328-c9fa89d128fa?w=600&q=80",
+    imageUrl: "https://images.unsplash.com/photo-1548036328-c9fa89d128fa?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
     rating: 4.8,
     reviews: 142,
     inStock: true
@@ -23,7 +23,7 @@ const PRODUCTS = [
     originalPrice: null,
     badge: null,
     description: "Ultra-soft 100% merino wool scarf in a timeless herringbone weave. Naturally temperature-regulating.",
-    imageUrl: "https://images.unsplash.com/photo-1601370552761-0c09e8e9a4ea?w=600&q=80",
+    imageUrl: "https://images.unsplash.com/photo-1601370552761-0c09e8e9a4ea?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
     rating: 4.6,
     reviews: 89,
     inStock: true
@@ -36,7 +36,7 @@ const PRODUCTS = [
     originalPrice: null,
     badge: "New",
     description: "Hand-thrown ceramic dripper and server in matte forest green glaze. Each piece is slightly unique.",
-    imageUrl: "https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=600&q=80",
+    imageUrl: "https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
     rating: 4.9,
     reviews: 211,
     inStock: true
@@ -49,7 +49,7 @@ const PRODUCTS = [
     originalPrice: null,
     badge: null,
     description: "Waxed cotton canvas duffle with full-grain leather handles and solid brass zippers. Ready for adventure.",
-    imageUrl: "https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=600&q=80",
+    imageUrl: "https://images.unsplash.com/photo-1553062407-98eeb64c6a62?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
     rating: 4.7,
     reviews: 76,
     inStock: true
@@ -62,7 +62,7 @@ const PRODUCTS = [
     originalPrice: null,
     badge: null,
     description: "Hand-poured soy wax candle with essential oils of cedar, sandalwood and bergamot. 60+ hour burn time.",
-    imageUrl: "https://images.unsplash.com/photo-1603905756565-7047b1a8c08a?w=600&q=80",
+    imageUrl: "https://images.unsplash.com/photo-1603905756565-7047b1a8c08a?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
     rating: 4.5,
     reviews: 178,
     inStock: true
@@ -75,7 +75,7 @@ const PRODUCTS = [
     originalPrice: 3299.00,
     badge: "Sale",
     description: "Relaxed-fit stone-washed linen shirt in earthy sage green. Naturally breathable for any climate.",
-    imageUrl: "https://images.unsplash.com/photo-1596755094514-f87e34085b2c?w=600&q=80",
+    imageUrl: "https://images.unsplash.com/photo-1596755094514-f87e34085b2c?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
     rating: 4.4,
     reviews: 95,
     inStock: true
@@ -88,7 +88,7 @@ const PRODUCTS = [
     originalPrice: null,
     badge: null,
     description: "Live-edge acacia wood serving board with juice groove. Food-safe oil finish. Each one uniquely grained.",
-    imageUrl: "https://images.unsplash.com/photo-1601924994987-69e26d50dc26?w=600&q=80",
+    imageUrl: "https://images.unsplash.com/photo-1601924994987-69e26d50dc26?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
     rating: 4.7,
     reviews: 133,
     inStock: true
@@ -101,7 +101,7 @@ const PRODUCTS = [
     originalPrice: null,
     badge: "New",
     description: "Slim full-grain leather bifold with RFID blocking. Holds 6 cards + cash. Develops a beautiful patina.",
-    imageUrl: "https://images.unsplash.com/photo-1627123424574-724758594e93?w=600&q=80",
+    imageUrl: "https://images.unsplash.com/photo-1627123424574-724758594e93?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
     rating: 4.8,
     reviews: 204,
     inStock: true
@@ -114,7 +114,7 @@ const PRODUCTS = [
     originalPrice: null,
     badge: null,
     description: "Chunky-knit ribbed beanie in oatmeal/ecru. Alpaca-wool blend, incredibly soft. One size fits most.",
-    imageUrl: "https://images.unsplash.com/photo-1576871337622-98d48d1cf531?w=600&q=80",
+    imageUrl: "https://images.unsplash.com/photo-1576871337622-98d48d1cf531?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
     rating: 4.6,
     reviews: 61,
     inStock: true
@@ -127,7 +127,7 @@ const PRODUCTS = [
     originalPrice: 2399.00,
     badge: "New",
     description: "Classic indigo men's jeans with stretch fabric and a modern slim cut. Durable enough for daily wear and stylish for shopping days.",
-    imageUrl: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ21itYu40NxASlvAmPlzdT5ti0FfdtpEKOMA&s",
+    imageUrl: "https://images.unsplash.com/photo-1542272604-787c62d465d1?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
     rating: 4.5,
     reviews: 48,
     inStock: true
