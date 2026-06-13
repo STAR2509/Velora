@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Checkout — Velora</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/animations.css">
+  <link rel="stylesheet" href="css/responsive.css">
+  <style>
+    .checkout-layout {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 2.5rem;
+      padding: 2.5rem 0;
+      align-items: start;
+    }
+    .checkout-card {
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-xl);
+      padding: 2rem;
+    }
+    .checkout-section-title {
+      font-family: var(--font-display);
+      font-size: 1.3rem;
+      margin-bottom: 1.5rem;
+      padding-bottom: 0.75rem;
+      border-bottom: 2px solid var(--color-primary);
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+    .form-row { display: grid; grid-template-columns: 1fr; gap: 0; }
+    .secure-badge {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: var(--font-size-xs);
+      color: var(--color-text-muted);
+      margin-bottom: 1.25rem;
+    }
+    .secure-badge span { color: var(--color-success); }
+    .order-summary-item {
+      display: flex;
+      justify-content: space-between;
+      padding: 0.65rem 0;
+      font-size: var(--font-size-sm);
+      border-bottom: 1px solid var(--color-border);
+    }
+    .order-summary-item:last-child { border-bottom: none; }
+    .order-total {
+      display: flex;
+      justify-content: space-between;
+      font-weight: 700;
+      font-size: 1.1rem;
+      padding: 1rem 0 0;
+      border-top: 2px solid var(--color-primary);
+      margin-top: 0.5rem;
+      color: var(--color-primary);
+    }
+    .step-label {
+      background: var(--color-primary);
+      color: white;
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.75rem;
+      font-weight: 700;
+    }
+  </style>
+</head>
+<body>
+  <div id="navbar-container"></div>
+
+  <main>
+    <div class="container">
+      <div style="padding: 2.5rem 0 0;">
+        <div class="breadcrumb">
+          <a href="index.html">Home</a>
+          <span class="breadcrumb__sep">/</span>
+          <a href="cart.html">Cart</a>
+          <span class="breadcrumb__sep">/</span>
+          <span>Checkout</span>
+        </div>
+        <h1 style="font-family: var(--font-display); font-size: 2.2rem; margin-bottom: 0.25rem;">Checkout</h1>
+      </div>
+
+      <div class="checkout-layout" id="checkout-layout">
+        <form id="checkout-form" onsubmit="handleCheckoutSubmit(event)" novalidate>
+          <!-- Shipping Info -->
+          <div class="checkout-card" style="margin-bottom: 1.5rem;">
+            <h2 class="checkout-section-title">
+              <span class="step-label">1</span> Shipping Information
+            </h2>
+            <div class="form-group">
+              <label class="form-label" for="fullName">Full Name</label>
+              <input class="form-input" type="text" id="fullName" name="fullName" autocomplete="name" placeholder="Jane Smith">
+              <p class="error-msg" id="fullName-error"></p>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label class="form-label" for="email">Email Address</label>
+                <input class="form-input" type="email" id="email" name="email" autocomplete="email" placeholder="jane@email.com">
+                <p class="error-msg" id="email-error"></p>
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="phone">Phone Number</label>
+                <input class="form-input" type="tel" id="phone" name="phone" autocomplete="tel" placeholder="10 digits">
+                <p class="error-msg" id="phone-error"></p>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="street">Street Address</label>
+              <input class="form-input" type="text" id="street" name="street" autocomplete="street-address" placeholder="123 Main Street, Apt 4B">
+              <p class="error-msg" id="street-error"></p>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label class="form-label" for="city">City</label>
+                <input class="form-input" type="text" id="city" name="city" autocomplete="address-level2" placeholder="New York">
+                <p class="error-msg" id="city-error"></p>
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="postal">Postal / ZIP Code</label>
+                <input class="form-input" type="text" id="postal" name="postal" autocomplete="postal-code" placeholder="10001">
+                <p class="error-msg" id="postal-error"></p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Payment -->
+          <div class="checkout-card">
+            <h2 class="checkout-section-title">
+              <span class="step-label">2</span> Payment Details
+            </h2>
+            <p class="secure-badge"><span>🔒</span> Secured with 256-bit SSL encryption</p>
+            <div class="form-group">
+              <label class="form-label" for="cardNumber">Card Number</label>
+              <input class="form-input" type="text" id="cardNumber" name="cardNumber" maxlength="16" placeholder="1234567890123456">
+              <p class="error-msg" id="cardNumber-error"></p>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label class="form-label" for="expiry">Expiry Date</label>
+                <input class="form-input" type="text" id="expiry" name="expiry" maxlength="5" placeholder="MM/YY">
+                <p class="error-msg" id="expiry-error"></p>
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="cvv">CVV</label>
+                <input class="form-input" type="text" id="cvv" name="cvv" maxlength="3" placeholder="123">
+                <p class="error-msg" id="cvv-error"></p>
+              </div>
+            </div>
+            <button type="submit" class="btn btn-primary btn-full btn-lg" style="margin-top: 0.75rem;">
+              🔒 Place Order
+            </button>
+          </div>
+        </form>
+
+        <!-- Order Summary -->
+        <aside class="checkout-card" id="order-summary-aside">
+          <h2 class="checkout-section-title" style="font-size:1.1rem;">
+            <span class="step-label">3</span> Order Summary
+          </h2>
+          <div id="checkout-items"></div>
+          <div class="order-total">
+            <span>Total</span>
+            <span id="checkout-total">$0.00</span>
+          </div>
+          <p style="font-size:var(--font-size-xs); color:var(--color-text-muted); margin-top:1rem; text-align:center;">
+            🚚 Free shipping included
+          </p>
+        </aside>
+      </div>
+    </div>
+  </main>
+
+  <div id="footer-container"></div>
+
+  <script src="js/main.js"></script>
+  <script src="js/cart.js"></script>
+  <script src="js/validation.js"></script>
+  <script>
+    /* Render order summary sidebar */
+    function renderOrderSummary() {
+      const container = document.getElementById('checkout-items');
+      const totalEl = document.getElementById('checkout-total');
+      const cart = getCart();
+
+      if (!container) return;
+
+      if (cart.length === 0) {
+        container.innerHTML = '<p style="color:var(--color-text-muted); font-size:0.9rem;">Your cart is empty. <a href="products.html">Shop now</a></p>';
+        return;
+      }
+
+      container.innerHTML = cart.map(item => `
+        <div class="order-summary-item">
+          <span>${item.name} <strong>×${item.quantity}</strong></span>
+          <span>$${(item.price * item.quantity).toFixed(2)}</span>
+        </div>
+      `).join('');
+
+      const subtotal = getCartSubtotal();
+      const total = subtotal * 1.1;
+      if (totalEl) totalEl.textContent = `$${total.toFixed(2)}`;
+    }
+
+    /* Auto-format expiry date MM/YY */
+    document.addEventListener('DOMContentLoaded', () => {
+      renderOrderSummary();
+      const expiryInput = document.getElementById('expiry');
+      if (expiryInput) {
+        expiryInput.addEventListener('input', function () {
+          let val = this.value.replace(/\D/g, '');
+          if (val.length >= 3) val = val.slice(0, 2) + '/' + val.slice(2, 4);
+          this.value = val;
+        });
+      }
+    });
+  </script>
+</body>
+</html>

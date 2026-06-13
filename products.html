@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Shop — Velora</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/animations.css">
+  <link rel="stylesheet" href="css/responsive.css">
+  <style>
+    .page-header {
+      background: var(--color-primary);
+      color: white;
+      padding: 3.5rem 2rem;
+      text-align: center;
+    }
+    .page-header h1 {
+      font-family: var(--font-display);
+      font-size: 2.8rem;
+      margin-bottom: 0.5rem;
+    }
+    .page-header p { color: rgba(255,255,255,0.8); }
+    .product-card__rating { display: flex; align-items: center; gap: 4px; margin-bottom: 0.5rem; font-size: 0.9rem; color: var(--color-accent); }
+    .rating-count { color: var(--color-text-muted); font-size: 0.75rem; }
+    .results-count { font-size: var(--font-size-sm); color: var(--color-text-muted); margin-bottom: 1.5rem; }
+    .search-bar {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      margin-bottom: 1.5rem;
+    }
+    .search-input {
+      flex: 1;
+      padding: 0.65rem 1.1rem;
+      border: 1.5px solid var(--color-border);
+      border-radius: var(--radius-full);
+      font-family: inherit;
+      font-size: var(--font-size-sm);
+      color: var(--color-text-primary);
+      outline: none;
+      transition: border-color 0.2s;
+      background: var(--color-surface);
+    }
+    .search-input:focus { border-color: var(--color-primary); }
+  </style>
+</head>
+<body>
+  <div id="navbar-container"></div>
+
+  <main>
+    <header class="page-header">
+      <h1>Shop All Products</h1>
+      <p>Handpicked. Responsibly made. Built to last.</p>
+    </header>
+
+    <section class="section">
+      <div class="container">
+        <!-- Search -->
+        <div class="search-bar">
+          <input type="text" class="search-input" id="search-input" placeholder="Search products..." oninput="filterAndRender()">
+        </div>
+
+        <!-- Filters & Sort -->
+        <div class="filter-bar">
+          <button class="filter-tag active" data-cat="All" onclick="setFilter(this, 'All')">All</button>
+          <button class="filter-tag" data-cat="Bags" onclick="setFilter(this, 'Bags')">Bags</button>
+          <button class="filter-tag" data-cat="Home" onclick="setFilter(this, 'Home')">Home</button>
+          <button class="filter-tag" data-cat="Accessories" onclick="setFilter(this, 'Accessories')">Accessories</button>
+          <button class="filter-tag" data-cat="Clothing" onclick="setFilter(this, 'Clothing')">Clothing</button>
+          <select class="sort-select" id="sort-select" onchange="filterAndRender()">
+            <option value="default">Sort: Featured</option>
+            <option value="price-asc">Price: Low to High</option>
+            <option value="price-desc">Price: High to Low</option>
+            <option value="rating">Top Rated</option>
+          </select>
+        </div>
+
+        <p class="results-count" id="results-count"></p>
+
+        <!-- Product Grid -->
+        <div class="product-grid" id="product-grid"></div>
+      </div>
+    </section>
+  </main>
+
+  <div id="footer-container"></div>
+
+  <script src="js/main.js"></script>
+  <script src="js/cart.js"></script>
+  <script src="js/products.js"></script>
+  <script>
+    let activeCategory = 'All';
+
+    /* Set active filter category */
+    function setFilter(btnEl, category) {
+      activeCategory = category;
+      document.querySelectorAll('.filter-tag').forEach(b => b.classList.remove('active'));
+      btnEl.classList.add('active');
+      filterAndRender();
+    }
+
+    /* Filter and sort products, then render */
+    function filterAndRender() {
+      const searchVal = document.getElementById('search-input').value.toLowerCase();
+      const sortVal = document.getElementById('sort-select').value;
+
+      let filtered = PRODUCTS.filter(p => {
+        const matchCat = activeCategory === 'All' || p.category === activeCategory;
+        const matchSearch = p.name.toLowerCase().includes(searchVal) || p.category.toLowerCase().includes(searchVal);
+        return matchCat && matchSearch;
+      });
+
+      if (sortVal === 'price-asc') filtered.sort((a, b) => a.price - b.price);
+      else if (sortVal === 'price-desc') filtered.sort((a, b) => b.price - a.price);
+      else if (sortVal === 'rating') filtered.sort((a, b) => b.rating - a.rating);
+
+      renderProducts('product-grid', filtered);
+
+      const countEl = document.getElementById('results-count');
+      if (countEl) countEl.textContent = `${filtered.length} product${filtered.length !== 1 ? 's' : ''} found`;
+    }
+
+    /* Pre-select category from URL param */
+    document.addEventListener('DOMContentLoaded', () => {
+      const params = new URLSearchParams(window.location.search);
+      const cat = params.get('category');
+      if (cat) {
+        const btn = document.querySelector(`.filter-tag[data-cat="${cat}"]`);
+        if (btn) setFilter(btn, cat);
+        else filterAndRender();
+      } else {
+        filterAndRender();
+      }
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Product — Velora</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/animations.css">
+  <link rel="stylesheet" href="css/responsive.css">
+  <style>
+    .product-detail__layout {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: start;
+      padding: 3rem 0;
+    }
+    .product-detail__image {
+      border-radius: var(--radius-xl);
+      overflow: hidden;
+      aspect-ratio: 1;
+      background: var(--color-surface-alt);
+    }
+    .product-detail__image img { width: 100%; height: 100%; object-fit: cover; }
+    .product-detail__category {
+      font-size: var(--font-size-xs);
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--color-primary);
+      margin-bottom: 0.75rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .product-detail__name {
+      font-family: var(--font-display);
+      font-size: 2.4rem;
+      font-weight: 700;
+      line-height: 1.15;
+      margin-bottom: 1rem;
+    }
+    .product-detail__rating {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 1.25rem;
+      font-size: 1.1rem;
+      color: var(--color-accent);
+    }
+    .rating-count { color: var(--color-text-muted); font-size: 0.85rem; }
+    .product-detail__price {
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--color-primary);
+      margin-bottom: 0.5rem;
+      display: flex;
+      align-items: baseline;
+      gap: 0.75rem;
+    }
+    .product-detail__original {
+      font-size: 1.2rem;
+      color: var(--color-text-muted);
+      text-decoration: line-through;
+      font-weight: 400;
+    }
+    .product-detail__desc { color: var(--color-text-secondary); line-height: 1.8; margin-bottom: 2rem; font-size: 1.05rem; }
+    .qty-control {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+    }
+    .qty-label { font-weight: 600; font-size: var(--font-size-sm); color: var(--color-text-secondary); }
+    .qty-btns {
+      display: flex;
+      align-items: center;
+      border: 1.5px solid var(--color-border);
+      border-radius: var(--radius-full);
+      overflow: hidden;
+    }
+    .qty-btn {
+      width: 40px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+      font-weight: 600;
+      background: none;
+      border: none;
+      cursor: pointer;
+      color: var(--color-text-primary);
+      transition: background var(--transition);
+    }
+    .qty-btn:hover { background: var(--color-surface-alt); }
+    .qty-num {
+      min-width: 44px;
+      text-align: center;
+      font-weight: 600;
+      font-size: 1rem;
+    }
+    .add-actions { display: flex; gap: 1rem; flex-wrap: wrap; }
+    .product-detail__features {
+      margin-top: 2.5rem;
+      border-top: 1px solid var(--color-border);
+      padding-top: 1.75rem;
+    }
+    .product-detail__features h3 { font-weight: 600; margin-bottom: 1rem; }
+    .feature-list { display: flex; flex-direction: column; gap: 0.6rem; }
+    .feature-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: var(--font-size-sm);
+      color: var(--color-text-secondary);
+    }
+    .feature-icon { color: var(--color-primary); font-size: 1rem; }
+  </style>
+</head>
+<body>
+  <div id="navbar-container"></div>
+
+  <main>
+    <div class="container">
+      <div class="breadcrumb">
+        <a href="index.html">Home</a>
+        <span class="breadcrumb__sep">/</span>
+        <a href="products.html">Shop</a>
+        <span class="breadcrumb__sep">/</span>
+        <span id="breadcrumb-name">Product</span>
+      </div>
+
+      <div class="product-detail__layout" id="product-detail-layout">
+        <p style="color:var(--color-text-muted)">Loading product...</p>
+      </div>
+    </div>
+
+    <!-- Related Products -->
+    <section class="section">
+      <div class="container">
+        <div class="section__header">
+          <h2 class="section__title" style="font-size:1.8rem;">You might also like</h2>
+        </div>
+        <div class="product-grid" id="related-products"></div>
+      </div>
+    </section>
+  </main>
+
+  <div id="footer-container"></div>
+
+  <script src="js/main.js"></script>
+  <script src="js/cart.js"></script>
+  <script src="js/products.js"></script>
+  <script>
+    let currentQty = 1;
+
+    /* Load product from URL param */
+    function loadProductDetail() {
+      const params = new URLSearchParams(window.location.search);
+      const id = parseInt(params.get('id'));
+      const product = PRODUCTS.find(p => p.id === id);
+      const layout = document.getElementById('product-detail-layout');
+
+      if (!product || !layout) {
+        layout.innerHTML = '<p>Product not found. <a href="products.html">Back to shop</a></p>';
+        return;
+      }
+
+      document.title = `${product.name} — Velora`;
+      const el = document.getElementById('breadcrumb-name');
+      if (el) el.textContent = product.name;
+
+      layout.innerHTML = `
+        <div class="product-detail__image">
+          <img src="${product.imageUrl}" alt="${product.name}">
+        </div>
+        <div class="product-detail__info">
+          <p class="product-detail__category">
+            ${product.category}
+            ${product.badge ? `<span class="product-card__badge" style="position:static;">${product.badge}</span>` : ''}
+          </p>
+          <h1 class="product-detail__name">${product.name}</h1>
+          <div class="product-detail__rating">
+            ${renderStars(product.rating)}
+            <span class="rating-count">${product.rating} (${product.reviews} reviews)</span>
+          </div>
+          <div class="product-detail__price">
+            $${product.price.toFixed(2)}
+            ${product.originalPrice ? `<span class="product-detail__original">$${product.originalPrice.toFixed(2)}</span>` : ''}
+          </div>
+          <p class="product-detail__desc">${product.description}</p>
+          <div class="qty-control">
+            <span class="qty-label">Quantity:</span>
+            <div class="qty-btns">
+              <button class="qty-btn" onclick="changeDetailQty(-1)">−</button>
+              <span class="qty-num" id="detail-qty">1</span>
+              <button class="qty-btn" onclick="changeDetailQty(1)">+</button>
+            </div>
+          </div>
+          <div class="add-actions">
+            <button class="btn btn-primary btn-lg btn-add-to-cart" onclick="addProductToCart(${product.id}, this)">
+              Add to Cart
+            </button>
+            <a href="cart.html" class="btn btn-outline btn-lg">View Cart</a>
+          </div>
+          <div class="product-detail__features">
+            <h3>Why Velora?</h3>
+            <div class="feature-list">
+              <div class="feature-item"><span class="feature-icon">♻</span> Responsibly sourced materials</div>
+              <div class="feature-item"><span class="feature-icon">🚚</span> Free shipping over $75</div>
+              <div class="feature-item"><span class="feature-icon">↩</span> 30-day free returns</div>
+              <div class="feature-item"><span class="feature-icon">🔒</span> Secure checkout</div>
+            </div>
+          </div>
+        </div>
+      `;
+
+      // Related products (same category, exclude current)
+      const related = PRODUCTS.filter(p => p.category === product.category && p.id !== product.id).slice(0, 3);
+      renderProducts('related-products', related.length ? related : PRODUCTS.filter(p => p.id !== product.id).slice(0, 3));
+    }
+
+    /* Change quantity on detail page */
+    function changeDetailQty(delta) {
+      currentQty = Math.max(1, currentQty + delta);
+      const el = document.getElementById('detail-qty');
+      if (el) el.textContent = currentQty;
+    }
+
+    /* Add to cart from detail page */
+    function addProductToCart(id, btnEl) {
+      const product = PRODUCTS.find(p => p.id === id);
+      if (!product) return;
+      for (let i = 0; i < currentQty; i++) {
+        addToCart({ id: product.id, name: product.name, price: product.price, quantity: 1, imageUrl: product.imageUrl });
+      }
+      if (btnEl) {
+        btnEl.classList.add('pulse');
+        btnEl.textContent = `✓ ${currentQty > 1 ? currentQty + 'x ' : ''}Added!`;
+        setTimeout(() => {
+          btnEl.classList.remove('pulse');
+          btnEl.textContent = 'Add to Cart';
+        }, 1600);
+      }
+      showToast(`${product.name} × ${currentQty} added to cart`);
+    }
+
+    document.addEventListener('DOMContentLoaded', loadProductDetail);
+  </script>
+</body>
+</html>
