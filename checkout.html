@@ -171,7 +171,7 @@
           <div id="checkout-items"></div>
           <div class="order-total">
             <span>Total</span>
-            <span id="checkout-total">$0.00</span>
+            <span id="checkout-total">₹0.00</span>
           </div>
           <p style="font-size:var(--font-size-xs); color:var(--color-text-muted); margin-top:1rem; text-align:center;">
             🚚 Free shipping included
@@ -203,13 +203,13 @@
       container.innerHTML = cart.map(item => `
         <div class="order-summary-item">
           <span>${item.name} <strong>×${item.quantity}</strong></span>
-          <span>$${(item.price * item.quantity).toFixed(2)}</span>
+          <span>₹${(item.price * item.quantity).toFixed(2)}</span>
         </div>
       `).join('');
 
       const subtotal = getCartSubtotal();
       const total = subtotal * 1.1;
-      if (totalEl) totalEl.textContent = `$${total.toFixed(2)}`;
+      if (totalEl) totalEl.textContent = `₹${total.toFixed(2)}`;
     }
 
     /* Auto-format expiry date MM/YY */

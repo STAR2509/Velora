@@ -6,8 +6,8 @@ const PRODUCTS = [
     id: 1,
     name: "Artisan Leather Tote",
     category: "Bags",
-    price: 129.99,
-    originalPrice: 179.99,
+    price: 5499.00,
+    originalPrice: 7499.00,
     badge: "Sale",
     description: "Hand-stitched full-grain leather tote with brass hardware. Spacious interior with zipper pocket. Perfect for work or weekend.",
     imageUrl: "https://images.unsplash.com/photo-1548036328-c9fa89d128fa?w=600&q=80",
@@ -19,7 +19,7 @@ const PRODUCTS = [
     id: 2,
     name: "Merino Wool Scarf",
     category: "Accessories",
-    price: 58.00,
+    price: 1499.00,
     originalPrice: null,
     badge: null,
     description: "Ultra-soft 100% merino wool scarf in a timeless herringbone weave. Naturally temperature-regulating.",
@@ -32,7 +32,7 @@ const PRODUCTS = [
     id: 3,
     name: "Ceramic Pour-Over Set",
     category: "Home",
-    price: 84.00,
+    price: 2199.00,
     originalPrice: null,
     badge: "New",
     description: "Hand-thrown ceramic dripper and server in matte forest green glaze. Each piece is slightly unique.",
@@ -45,7 +45,7 @@ const PRODUCTS = [
     id: 4,
     name: "Canvas Weekend Bag",
     category: "Bags",
-    price: 97.00,
+    price: 4299.00,
     originalPrice: null,
     badge: null,
     description: "Waxed cotton canvas duffle with full-grain leather handles and solid brass zippers. Ready for adventure.",
@@ -58,7 +58,7 @@ const PRODUCTS = [
     id: 5,
     name: "Soy Wax Candle — Cedar",
     category: "Home",
-    price: 34.00,
+    price: 799.00,
     originalPrice: null,
     badge: null,
     description: "Hand-poured soy wax candle with essential oils of cedar, sandalwood and bergamot. 60+ hour burn time.",
@@ -71,8 +71,8 @@ const PRODUCTS = [
     id: 6,
     name: "Linen Shirt — Sage",
     category: "Clothing",
-    price: 74.00,
-    originalPrice: 95.00,
+    price: 2499.00,
+    originalPrice: 3299.00,
     badge: "Sale",
     description: "Relaxed-fit stone-washed linen shirt in earthy sage green. Naturally breathable for any climate.",
     imageUrl: "https://images.unsplash.com/photo-1596755094514-f87e34085b2c?w=600&q=80",
@@ -84,7 +84,7 @@ const PRODUCTS = [
     id: 7,
     name: "Wooden Serving Board",
     category: "Home",
-    price: 46.00,
+    price: 1199.00,
     originalPrice: null,
     badge: null,
     description: "Live-edge acacia wood serving board with juice groove. Food-safe oil finish. Each one uniquely grained.",
@@ -97,7 +97,7 @@ const PRODUCTS = [
     id: 8,
     name: "Leather Bifold Wallet",
     category: "Accessories",
-    price: 62.00,
+    price: 1699.00,
     originalPrice: null,
     badge: "New",
     description: "Slim full-grain leather bifold with RFID blocking. Holds 6 cards + cash. Develops a beautiful patina.",
@@ -110,7 +110,7 @@ const PRODUCTS = [
     id: 9,
     name: "Knit Beanie — Oatmeal",
     category: "Accessories",
-    price: 42.00,
+    price: 999.00,
     originalPrice: null,
     badge: null,
     description: "Chunky-knit ribbed beanie in oatmeal/ecru. Alpaca-wool blend, incredibly soft. One size fits most.",
@@ -118,8 +118,26 @@ const PRODUCTS = [
     rating: 4.6,
     reviews: 61,
     inStock: true
+  },
+  {
+    id: 10,
+    name: "Men's Jeans",
+    category: "Clothing",
+    price: 1899.00,
+    originalPrice: 2399.00,
+    badge: "New",
+    description: "Classic indigo men's jeans with stretch fabric and a modern slim cut. Durable enough for daily wear and stylish for shopping days.",
+    imageUrl: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ21itYu40NxASlvAmPlzdT5ti0FfdtpEKOMA&s",
+    rating: 4.5,
+    reviews: 48,
+    inStock: true
   }
 ];
+
+/* Format currency as Indian rupees */
+function formatPrice(amount) {
+  return `₹${amount.toFixed(2)}`;
+}
 
 /* Render star rating HTML */
 function renderStars(rating) {
@@ -158,8 +176,8 @@ function renderProductCard(product) {
           <span class="rating-count">(${product.reviews})</span>
         </div>
         <p class="product-card__price">
-          $${product.price.toFixed(2)}
-          ${product.originalPrice ? `<span class="original-price">$${product.originalPrice.toFixed(2)}</span>` : ''}
+          ${formatPrice(product.price)}
+          ${product.originalPrice ? `<span class="original-price">${formatPrice(product.originalPrice)}</span>` : ''}
         </p>
       </div>
       <div class="product-card__footer">

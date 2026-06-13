@@ -93,14 +93,14 @@ function renderCartPage() {
       </div>
       <div class="cart-item__info">
         <h3 class="cart-item__name">${item.name}</h3>
-        <p class="cart-item__price">$${item.price.toFixed(2)} each</p>
+        <p class="cart-item__price">₹${item.price.toFixed(2)} each</p>
       </div>
       <div class="cart-item__qty">
         <button class="qty-btn" onclick="changeQty(${item.id}, -1)">−</button>
         <span class="qty-val">${item.quantity}</span>
         <button class="qty-btn" onclick="changeQty(${item.id}, 1)">+</button>
       </div>
-      <div class="cart-item__subtotal">$${(item.price * item.quantity).toFixed(2)}</div>
+      <div class="cart-item__subtotal">₹${(item.price * item.quantity).toFixed(2)}</div>
       <button class="cart-item__remove" onclick="deleteItem(${item.id})" aria-label="Remove ${item.name}">✕</button>
     </div>
   `).join('');
@@ -135,9 +135,9 @@ function updateCartTotals() {
   const total = subtotal + tax;
 
   const setEl = (id, val) => { const el = document.getElementById(id); if (el) el.textContent = val; };
-  setEl('cart-subtotal', `$${subtotal.toFixed(2)}`);
-  setEl('cart-tax', `$${tax.toFixed(2)}`);
-  setEl('cart-total', `$${total.toFixed(2)}`);
+  setEl('cart-subtotal', `₹${subtotal.toFixed(2)}`);
+  setEl('cart-tax', `₹${tax.toFixed(2)}`);
+  setEl('cart-total', `₹${total.toFixed(2)}`);
 }
 
 /* Clear entire cart */
