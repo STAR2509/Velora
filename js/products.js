@@ -62,7 +62,7 @@ const PRODUCTS = [
     originalPrice: null,
     badge: null,
     description: "Hand-poured soy wax candle with essential oils of cedar, sandalwood and bergamot. 60+ hour burn time.",
-    imageUrl: "https://images.unsplash.com/photo-1596232906355-12f45c24c9cd?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
+    imageUrl: "https://images.unsplash.com/photo-1518895949257-7621c3c786d7?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
     rating: 4.5,
     reviews: 178,
     inStock: true
